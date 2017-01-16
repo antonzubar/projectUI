@@ -59,10 +59,11 @@ run_tests_image = PhotoImage(file='D:/testing/soft/run_test.gif')
 run_tests_image_lighted = PhotoImage(file='D:/testing/soft/run_test_lighted.gif')
 run_tests_button = Button(f1, width=button_menu_width, height=button_menu_height, bd=border_value,
                           font=button_font, image=run_tests_image,
-                          command=lambda: test2.run_test(listbox1, settings, run_tests_button, horiz_placemnt))  # height = 3 == 65 pixels
+                          command=lambda: test2.run_test(listbox1, settings, run_tests_button, horiz_placemnt,
+                                                         stop_tests_button))  # height = 3 == 65 pixels
 run_tests_button.place(x=horiz_placemnt * 0.46, y=145)
-run_tests_button.bind("<Enter>", lambda a: run_tests_button.configure(image=run_tests_image_lighted))
-run_tests_button.bind("<Leave>", lambda a: run_tests_button.configure(image=run_tests_image))
+run_tests_button.bind("<Enter>", lambda button: run_tests_button.configure(image=run_tests_image_lighted))
+run_tests_button.bind("<Leave>", lambda button: run_tests_button.configure(image=run_tests_image))
 
 # GENERATE REPORT button desc
 generate_report_image = PhotoImage(file='D:/testing/soft/generate_report.gif')
@@ -71,8 +72,8 @@ generate_report_button = Button(f1, width=button_menu_width, height=button_menu_
                                 fg="white", image=generate_report_image,
                                 command=lambda: test2.generate_report, font=button_font)
 generate_report_button.place(x=horiz_placemnt * 0.702, y=114)
-generate_report_button.bind("<Enter>", lambda a: generate_report_button.configure(image=generate_report_image_lighted))
-generate_report_button.bind("<Leave>", lambda a: generate_report_button.configure(image=generate_report_image))
+generate_report_button.bind("<Enter>", lambda button: generate_report_button.configure(image=generate_report_image_lighted))
+generate_report_button.bind("<Leave>", lambda button: generate_report_button.configure(image=generate_report_image))
 
 # OPEN LAST REPORT button desc
 open_last_report_image = PhotoImage(file='D:/testing/soft/open_last_report.gif')
@@ -82,8 +83,8 @@ open_last_report_button = Button(f1, width=button_menu_width, height=button_menu
                                  command=lambda: test2.open_last_report, font=button_font)
 open_last_report_button.place(x=horiz_placemnt * 0.702, y=145)
 open_last_report_button.bind("<Enter>",
-                             lambda a: open_last_report_button.configure(image=open_last_report_image_lighted))
-open_last_report_button.bind("<Leave>", lambda a: open_last_report_button.configure(image=open_last_report_image))
+                             lambda button: open_last_report_button.configure(image=open_last_report_image_lighted))
+open_last_report_button.bind("<Leave>", lambda button: open_last_report_button.configure(image=open_last_report_image))
 
 # SETUP TEST RUN button desc
 setup_test_run_image = PhotoImage(file='D:/testing/soft/setup_test_run.gif')
@@ -92,8 +93,8 @@ setup_test_run_button = Button(f1, width=button_menu_width, height=button_menu_h
                                fg="white", image=setup_test_run_image,
                                command=lambda: test2.setup_test_run(), font=button_font)
 setup_test_run_button.place(x=horiz_placemnt * 0.46, y=114)
-setup_test_run_button.bind("<Enter>", lambda a: setup_test_run_button.configure(image=setup_test_run_image_lighted))
-setup_test_run_button.bind("<Leave>", lambda a: setup_test_run_button.configure(image=setup_test_run_image))
+setup_test_run_button.bind("<Enter>", lambda button: setup_test_run_button.configure(image=setup_test_run_image_lighted))
+setup_test_run_button.bind("<Leave>", lambda button: setup_test_run_button.configure(image=setup_test_run_image))
 
 # BROWSE YOUR TESTS button desc
 browse_tests_image = PhotoImage(file='D:/testing/soft/browse.gif')
@@ -101,7 +102,15 @@ browse_tests_image_lighted = PhotoImage(file='D:/testing/soft/browse_lighted.gif
 browse_tests_button = Button(f1, text="Browse Your Tests", height=19, image=browse_tests_image, bd=1,
                              command=lambda: test2.browsecsv(listbox1, vert_placemnt, horiz_placemnt))
 browse_tests_button.place(x=2, y=vert_placemnt * 0.87, width=horiz_placemnt * 0.4)
-browse_tests_button.bind("<Enter>", lambda a: browse_tests_button.configure(image=browse_tests_image_lighted))
-browse_tests_button.bind("<Leave>", lambda a: browse_tests_button.configure(image=browse_tests_image))
+browse_tests_button.bind("<Enter>", lambda button: browse_tests_button.configure(image=browse_tests_image_lighted))
+browse_tests_button.bind("<Leave>", lambda button: browse_tests_button.configure(image=browse_tests_image))
+
+# STOP TESTS button desc
+stop_tests_image = PhotoImage(file='D:/testing/soft/stop_tests.png')
+stop_tests_image_lighted = PhotoImage(file='D:/testing/soft/stop_tests_lighted.png')
+stop_tests_button = Button(f1, width=150, height=25, image=stop_tests_image, bd=0,
+                           command=lambda: test2.kill_process(horiz_placemnt, run_tests_button, stop_tests_button))
+stop_tests_button.bind("<Enter>", lambda button: stop_tests_button.configure(image=stop_tests_image_lighted))
+stop_tests_button.bind("<Leave>", lambda button: stop_tests_button.configure(image=stop_tests_image))
 
 root.mainloop()

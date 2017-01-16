@@ -3,6 +3,7 @@ from tkinter.filedialog import *
 from tkinter import ttk
 
 path_to_test = open('D:/testing/soft/Settings.ini', 'r').readlines()
+global run_tests_process
 
 
 def browsecsv(listbox1, vert_placemnt, horiz_placemnt):
@@ -40,16 +41,24 @@ def center(toplevel, window):  # центрирует появление окн�
     return horiz_placemnt, vert_placemnt
 
 
-def run_test(listbox1, path, run_tests_button, horiz_placemnt):
-    global path_to_test
+def run_test(listbox1, path, run_tests_button, horiz_placemnt, stop_tests):
+    global path_to_test, run_tests_process
     run_tests_button.place_forget()
+    stop_tests.place(x=horiz_placemnt * 0.46, y=145)
     selected_item = listbox1.get(ACTIVE)
     if path_to_test != '':
         cmd = 'cd /d ' + path_to_test[0] + ' & ' + 'py.test ' + selected_item + ' -s --alluredir rep'
     else:
         cmd = 'cd /d ' + path[0] + ' & ' + 'py.test ' + selected_item + ' -s --alluredir rep'
-    subprocess.Popen(cmd, shell=True).poll()
-    #run_tests_button.place(x=horiz_placemnt * 0.46, y=145)
+    run_tests_process = subprocess.Popen(cmd, shell=True)
+
+
+# kill RUN TESTS process
+def kill_process(horiz_placemnt, run_tests_button, stop_tests):
+    global run_tests_process
+    subprocess.Popen("TASKKILL /F /PID {pid} /T".format(pid=run_tests_process.pid))
+    run_tests_button.place(x=horiz_placemnt * 0.46, y=145)
+    stop_tests.place_forget()
 
 
 def generate_report():
