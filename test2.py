@@ -1,6 +1,6 @@
 import subprocess
 from tkinter.filedialog import *
-from tkinter import ttk
+import time
 
 path_to_test = open('D:/testing/soft/Settings.ini', 'r').readlines()
 global run_tests_process
@@ -36,6 +36,9 @@ def center(toplevel, window):  # центрирует появление окн�
     elif window == "config":
         horiz_placemnt = w / 5
         vert_placemnt = h / 3.9
+    elif window == "generating":
+        horiz_placemnt = w / 6
+        vert_placemnt = h / 8
     toplevel.geometry(
         "%dx%d+%d+%d" % (horiz_placemnt, vert_placemnt, (w - horiz_placemnt) / 2, (h - vert_placemnt) / 2))
     return horiz_placemnt, vert_placemnt
@@ -62,8 +65,37 @@ def kill_process(horiz_placemnt, run_tests_button, stop_tests):
 
 
 def generate_report():
-    cmd = 'cd /d d:/Automation/bin' + ' & ' + 'allure generate D:/testing/ddt_testing/tests/rep'
-    subprocess.Popen(cmd, shell=True)
+    generating_window = Toplevel()
+    center(generating_window, "generating")
+    generating_window.deiconify()
+    generating_window.grab_set()
+    generating_window.focus_force()
+    generating_window.title('Generating Report')
+    generating_window.resizable(False, False)
+    # im = PhotoImage(file='D:/testing/soft/generating_report_background.png')
+    im2 = PhotoImage(file='D:/testing/soft/1.gif', format="gif -index 3")
+    # label1 = Label(generating_window, image=im)
+    # label1.pack()
+
+    def animation():
+        label2.after(100, lambda: im2.configure(format="gif -index 0"))
+        label2.after(200, lambda: im2.configure(format="gif -index 1"))
+        label2.after(300, lambda: im2.configure(format="gif -index 2"))
+        label2.after(400, lambda: im2.configure(format="gif -index 3"))
+        label2.after(400, lambda: animation())
+
+    label2 = Label(generating_window, image=im2)
+    label2.pack()
+    button1 = Button(generating_window, command=animation())
+    button1.pack()
+
+
+
+
+
+    # cmd = 'cd /d d:/Automation/bin' + ' & ' + 'allure generate D:/testing/ddt_testing/tests/rep'
+    # subprocess.Popen(cmd, shell=True)
+    generating_window.mainloop()
 
 
 def open_last_report():

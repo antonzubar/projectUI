@@ -69,8 +69,8 @@ run_tests_button.bind("<Leave>", lambda button: run_tests_button.configure(image
 generate_report_image = PhotoImage(file='D:/testing/soft/generate_report.gif')
 generate_report_image_lighted = PhotoImage(file='D:/testing/soft/generate_report_lighted.gif')
 generate_report_button = Button(f1, width=button_menu_width, height=button_menu_height, bd=border_value,
-                                fg="white", image=generate_report_image,
-                                command=lambda: test2.generate_report, font=button_font)
+                                fg="white", image=generate_report_image, font=button_font,
+                                command=lambda: test2.generate_report())
 generate_report_button.place(x=horiz_placemnt * 0.702, y=114)
 generate_report_button.bind("<Enter>", lambda button: generate_report_button.configure(image=generate_report_image_lighted))
 generate_report_button.bind("<Leave>", lambda button: generate_report_button.configure(image=generate_report_image))
@@ -80,7 +80,7 @@ open_last_report_image = PhotoImage(file='D:/testing/soft/open_last_report.gif')
 open_last_report_image_lighted = PhotoImage(file='D:/testing/soft/open_last_report_lighted.gif')
 open_last_report_button = Button(f1, width=button_menu_width, height=button_menu_height, bd=border_value,
                                  fg="white", image=open_last_report_image,
-                                 command=lambda: test2.open_last_report, font=button_font)
+                                 command=lambda: test2.open_last_report(), font=button_font)
 open_last_report_button.place(x=horiz_placemnt * 0.702, y=145)
 open_last_report_button.bind("<Enter>",
                              lambda button: open_last_report_button.configure(image=open_last_report_image_lighted))
