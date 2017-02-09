@@ -1,7 +1,9 @@
-import subprocess
+import subprocess, psutil
 from tkinter.filedialog import *
-import time
+from tkinter import ttk
+import xlrd, xlwt
 
+# -------------------------------------------First Tab Functions--------------------------------------------------------
 path_to_test = open('D:/testing/soft/Settings.ini', 'r').readlines()
 global run_tests_process
 
@@ -37,8 +39,11 @@ def center(toplevel, window):  # центрирует появление окн�
         horiz_placemnt = w / 5
         vert_placemnt = h / 3.9
     elif window == "generating":
-        horiz_placemnt = w / 6
-        vert_placemnt = h / 8
+        horiz_placemnt = w / 11
+        vert_placemnt = h / 7
+    elif window == "commissions_panel":
+        horiz_placemnt = w / 4.75
+        vert_placemnt = h / 3.55
     toplevel.geometry(
         "%dx%d+%d+%d" % (horiz_placemnt, vert_placemnt, (w - horiz_placemnt) / 2, (h - vert_placemnt) / 2))
     return horiz_placemnt, vert_placemnt
@@ -66,40 +71,86 @@ def kill_process(horiz_placemnt, run_tests_button, stop_tests):
 
 def generate_report():
     generating_window = Toplevel()
+    generating_window.overrideredirect(1)  # - убирает все элементы окна
     center(generating_window, "generating")
     generating_window.deiconify()
     generating_window.grab_set()
     generating_window.focus_force()
     generating_window.title('Generating Report')
     generating_window.resizable(False, False)
-    # im = PhotoImage(file='D:/testing/soft/generating_report_background.png')
-    im2 = PhotoImage(file='D:/testing/soft/1.gif', format="gif -index 3")
-    # label1 = Label(generating_window, image=im)
-    # label1.pack()
+    generating_window.configure(bg="white")
+    im2 = PhotoImage(file='D:/testing/soft/sciv/animation1.gif')
 
     def animation():
-        label2.after(100, lambda: im2.configure(format="gif -index 0"))
-        label2.after(200, lambda: im2.configure(format="gif -index 1"))
-        label2.after(300, lambda: im2.configure(format="gif -index 2"))
-        label2.after(400, lambda: im2.configure(format="gif -index 3"))
-        label2.after(400, lambda: animation())
+        processes = psutil.pids()
+        if a not in processes:
+            generating_window.destroy()
+        i = 40
+        label2.after(i, lambda: im2.configure(format="gif -index 0"))
+        label2.after(i * 2, lambda: im2.configure(format="gif -index 1"))
+        label2.after(i * 3, lambda: im2.configure(format="gif -index 2"))
+        label2.after(i * 4, lambda: im2.configure(format="gif -index 3"))
+        label2.after(i * 5, lambda: im2.configure(format="gif -index 4"))
+        label2.after(i * 6, lambda: im2.configure(format="gif -index 5"))
+        label2.after(i * 7, lambda: im2.configure(format="gif -index 6"))
+        label2.after(i * 8, lambda: im2.configure(format="gif -index 7"))
+        label2.after(i * 9, lambda: im2.configure(format="gif -index 8"))
+        label2.after(i * 10, lambda: im2.configure(format="gif -index 9"))
+        label2.after(i * 11, lambda: im2.configure(format="gif -index 10"))
+        label2.after(i * 12, lambda: im2.configure(format="gif -index 11"))
+        label2.after(i * 13, lambda: im2.configure(format="gif -index 12"))
+        label2.after(i * 14, lambda: im2.configure(format="gif -index 13"))
+        label2.after(i * 15, lambda: im2.configure(format="gif -index 14"))
+        label2.after(i * 16, lambda: im2.configure(format="gif -index 15"))
+        label2.after(i * 17, lambda: im2.configure(format="gif -index 16"))
+        label2.after(i * 18, lambda: im2.configure(format="gif -index 17"))
+        label2.after(i * 19, lambda: im2.configure(format="gif -index 18"))
+        label2.after(i * 20, lambda: im2.configure(format="gif -index 19"))
+        label2.after(i * 21, lambda: im2.configure(format="gif -index 20"))
+        label2.after(i * 22, lambda: im2.configure(format="gif -index 21"))
+        label2.after(i * 23, lambda: im2.configure(format="gif -index 22"))
+        label2.after(i * 24, lambda: im2.configure(format="gif -index 23"))
+        label2.after(i * 25, lambda: im2.configure(format="gif -index 24"))
+        label2.after(i * 26, lambda: im2.configure(format="gif -index 25"))
+        label2.after(i * 27, lambda: im2.configure(format="gif -index 26"))
+        label2.after(i * 28, lambda: im2.configure(format="gif -index 27"))
+        label2.after(i * 29, lambda: im2.configure(format="gif -index 28"))
+        label2.after(i * 30, lambda: im2.configure(format="gif -index 29"))
+        label2.after(i * 31, lambda: im2.configure(format="gif -index 30"))
+        label2.after(i * 32, lambda: im2.configure(format="gif -index 31"))
+        label2.after(i * 33, lambda: im2.configure(format="gif -index 32"))
+        label2.after(i * 34, lambda: im2.configure(format="gif -index 33"))
+        label2.after(i * 35, lambda: im2.configure(format="gif -index 34"))
+        label2.after(i * 36, lambda: im2.configure(format="gif -index 35"))
+        label2.after(i * 37, lambda: im2.configure(format="gif -index 36"))
+        label2.after(i * 38, lambda: im2.configure(format="gif -index 37"))
+        label2.after(i * 39, lambda: im2.configure(format="gif -index 38"))
+        label2.after(i * 40, lambda: im2.configure(format="gif -index 39"))
+        label2.after(i * 41, lambda: im2.configure(format="gif -index 40"))
+        label2.after(i * 42, lambda: im2.configure(format="gif -index 41"))
+        label2.after(i * 43, lambda: im2.configure(format="gif -index 42"))
+        label2.after(i * 44, lambda: im2.configure(format="gif -index 43"))
+        label2.after(i * 45, lambda: im2.configure(format="gif -index 44"))
+        label2.after(i * 46, lambda: im2.configure(format="gif -index 45"))
+        label2.after(i * 47, lambda: im2.configure(format="gif -index 46"))
+        label2.after(i * 48, lambda: im2.configure(format="gif -index 47"))
+        label2.after(i * 49, lambda: im2.configure(format="gif -index 48"))
+        label2.after(i * 50, lambda: im2.configure(format="gif -index 49"))
+        label2.after(i * 50, lambda: animation())
 
-    label2 = Label(generating_window, image=im2)
-    label2.pack()
+    cmd = 'cd /d d:/testing/ddt_testing' + ' & ' + 'D:/Automation/bin/allure generate D:/testing/ddt_testing/tests/rep'
+    proc = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
+    a = proc.pid
+
+    label2 = Label(generating_window, image=im2, bg="white")
+    label2.place(x=3, y=0)
     button1 = Button(generating_window, command=animation())
-    button1.pack()
 
-
-
-
-
-    # cmd = 'cd /d d:/Automation/bin' + ' & ' + 'allure generate D:/testing/ddt_testing/tests/rep'
-    # subprocess.Popen(cmd, shell=True)
     generating_window.mainloop()
 
 
 def open_last_report():
-    cmd = 'cd /d d:/Automation/bin' + ' & ' + 'allure report open'
+    cmd = 'd:/testing/ddt_testing/allure-report/index.html'
     subprocess.Popen(cmd, shell=True)
 
 
@@ -262,3 +313,182 @@ def change_current_settings(link_text, variable, timeout_text, window):
 
 def close_settings(window):
     window.destroy()
+
+
+# ---------------------------------------------Second Tab Functions-----------------------------------------------------
+def set_commissions():
+    commissions_panel = Toplevel()
+    center(commissions_panel, "commissions_panel")
+    commissions_panel.deiconify()
+    commissions_panel.grab_set()
+    commissions_panel.focus_force()
+    commissions_panel.resizable(False, False)
+
+    # Constants
+    main_orange = '#%02x%02x%02x' % (255, 184, 61)
+    font = 'Anago 10 bold'
+    text_box_color = 'antique white'
+    x_placement = 127
+    y_placement = 100
+    x_step = 52
+    y_step = 30
+
+    n = ttk.Notebook(commissions_panel)
+    stock_frame = ttk.Frame(n)  # first page, which would get widgets gridded into it
+    option_frame = ttk.Frame(n)  # second page
+    mf_frame = ttk.Frame(n)  # third page
+    n.add(stock_frame, text='Stocks')
+    n.add(option_frame, text='Options')
+    n.add(mf_frame, text='Mutual Funds')
+    n.place(x=0, y=0)
+
+    # Create style of tabs
+    ttk.Style().configure("TNotebook", background=main_orange)
+    ttk.Style().map("TNotebook.Tab", background=[('selected', "grey")], foreground=[("selected", "grey")])
+    ttk.Style().configure("TNotebook.Tab", background="white", foreground="DarkGoldenrod4")
+
+    im = PhotoImage(file='D:/testing/soft/commission_of_stock.png')
+    label1 = Label(stock_frame, image=im)
+    label1.pack()
+    im1 = PhotoImage(file='D:/testing/soft/commission_of_options.png')
+    label2 = Label(option_frame, image=im1)
+    label2.pack()
+    im2 = PhotoImage(file='D:/testing/soft/commission_of_mutual_funds.png')
+    label3 = Label(mf_frame, image=im2)
+    label3.pack()
+
+    class StockCommissionTextbox():  # textbox class
+        def put_textbox(self, xx, yy, i):
+            commission_text = Text(stock_frame, width=4, height=1, bg=text_box_color, font='Anago-Book 11',
+                                   fg='gray38')
+            # select commissions from excel
+            stock_sheet = xlrd.open_workbook('D:/testing/ddt_testing/Data for testing/StocksTestData.xlsx')
+            first_stock_sheet = stock_sheet.sheet_by_index(0)
+            commissions = first_stock_sheet.row_values(i + 1)[1]
+            commission_text.insert(END, commissions)
+            commission_text.place(x=xx, y=yy)
+
+    class OptionsCommissionTextbox():  # textbox class
+        def put_textbox(self, xx, yy, i):
+            commission_text = Text(option_frame, width=4, height=1, bg=text_box_color, font='Anago-Book 9',
+                                   fg='gray38')
+            # select commissions from excel
+            options_sheet = xlrd.open_workbook('D:/testing/ddt_testing/Data for testing/OptionsTestData.xlsx')
+            first_options_sheet = options_sheet.sheet_by_index(0)
+            commissions = first_options_sheet.row_values(i + 1)[1]
+            if (4<i<10) or (14<i<20):
+                commissions = first_options_sheet.row_values(i-5 + 1)[2]
+            if i>10 and (9<i<14) and (19<i<24):
+                commissions = first_options_sheet.row_values(i - 5)[1]
+            commission_text.insert(END, commissions)
+            commission_text.place(x=xx, y=yy)
+
+    class MFCommissionTextbox():  # textbox class
+        def put_textbox(self, xx, yy):
+            commission_text = Text(mf_frame, width=4, height=1, bg=text_box_color, font='Anago-Book 11',
+                                   fg='gray38')
+            commission_text.insert(END, "5.95")
+            commission_text.place(x=xx, y=yy)
+
+# -------------------------------------------------Stock tab -----------------------------------------------------------
+
+    textbox_list = []
+    count = 0
+    xx = x_placement
+    yy = y_placement
+    for i in range(0, 25):
+        textbox_object = StockCommissionTextbox()
+        textbox_list.append(textbox_object)
+        if count < 5:
+            textbox_list[i].put_textbox(xx, yy + (y_step * count), i)
+            count += 1
+        else:
+            count = 1
+            xx = xx + x_step
+            textbox_list[i].put_textbox(xx, yy, i)
+
+    ok_st = Button(stock_frame, text="  Save  ", bg=main_orange, fg='white', font=font, bd=0,
+                   command=lambda: commissions_panel.destroy())
+    ok_st.place(x=146, y=250)
+    ok_st.bind("<Enter>", lambda a: ok_st.configure(bg="burlywood1"))
+    ok_st.bind("<Leave>", lambda a: ok_st.configure(bg=main_orange))
+
+    cancel_st = Button(stock_frame, text="Cancel", bg="gray64", fg='white', font=font, bd=0,
+                       command=lambda: commissions_panel.destroy())
+    cancel_st.place(x=200, y=250)
+    cancel_st.bind("<Enter>", lambda a: cancel_st.configure(bg="gray79"))
+    cancel_st.bind("<Leave>", lambda a: cancel_st.configure(bg="gray64"))
+
+# -------------------------------------------------Options tab ---------------------------------------------------------
+
+    textbox_list = []
+    count = 0
+    count2 = 0
+    xx = x_placement - 55
+    yy = y_placement
+    for i in range(0, 25):
+        textbox_object = OptionsCommissionTextbox()
+        textbox_list.append(textbox_object)
+        if count < 5:
+            textbox_list[i].put_textbox(xx, yy + (y_step * count), i)
+            count += 1
+        elif count == 5:
+            if count2 == 10:
+                xx = xx + x_step / 1.3
+                textbox_list[i].put_textbox(xx, yy, i)
+                count2 = 0
+                count = 1
+            else:
+                xx = xx + x_step / 2
+                textbox_list[i].put_textbox(xx, yy, i)
+                count = 1
+        count2 += 1
+    ok_opt = Button(option_frame, text="  Save  ", bg=main_orange, fg='white', font=font, bd=0,
+                    command=lambda: commissions_panel.destroy())
+    ok_opt.place(x=146, y=250)
+    ok_opt.bind("<Enter>", lambda a: ok_opt.configure(bg="burlywood1"))
+    ok_opt.bind("<Leave>", lambda a: ok_opt.configure(bg=main_orange))
+
+    cancel_opt = Button(option_frame, text="Cancel", bg="gray64", fg='white', font=font, bd=0,
+                        command=lambda: commissions_panel.destroy())
+    cancel_opt.place(x=200, y=250)
+    cancel_opt.bind("<Enter>", lambda a: cancel_opt.configure(bg="gray79"))
+    cancel_opt.bind("<Leave>", lambda a: cancel_opt.configure(bg="gray64"))
+
+# -------------------------------------------------Mutual Funds tab ----------------------------------------------------
+
+    textbox_list = []
+    count = 0
+    count2 = 0
+    xx = x_placement - 44
+    yy = y_placement
+    for i in range(0, 30):
+        textbox_object = MFCommissionTextbox()
+        textbox_list.append(textbox_object)
+        if count < 5:
+            textbox_list[i].put_textbox(xx, yy + (y_step * count))
+            count += 1
+        elif count == 5:
+            if count2 == 15:
+                xx = xx + 1.3 * x_step
+                textbox_list[i].put_textbox(xx, yy)
+                count2 = 0
+                count = 1
+            else:
+                xx = xx + x_step / 1.1
+                textbox_list[i].put_textbox(xx, yy)
+                count = 1
+        count2 += 1
+    ok_mf = Button(mf_frame, text="  Save  ", bg=main_orange, fg='white', font=font, bd=0,
+                   command=lambda: commissions_panel.destroy())
+    ok_mf.place(x=146, y=250)
+    ok_mf.bind("<Enter>", lambda a: ok_mf.configure(bg="burlywood1"))
+    ok_mf.bind("<Leave>", lambda a: ok_mf.configure(bg=main_orange))
+
+    cancel_mf = Button(mf_frame, text="Cancel", bg="gray64", fg='white', font=font, bd=0,
+                       command=lambda: commissions_panel.destroy())
+    cancel_mf.place(x=200, y=250)
+    cancel_mf.bind("<Enter>", lambda a: cancel_mf.configure(bg="gray79"))
+    cancel_mf.bind("<Leave>", lambda a: cancel_mf.configure(bg="gray64"))
+
+    commissions_panel.mainloop()

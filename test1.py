@@ -72,7 +72,8 @@ generate_report_button = Button(f1, width=button_menu_width, height=button_menu_
                                 fg="white", image=generate_report_image, font=button_font,
                                 command=lambda: test2.generate_report())
 generate_report_button.place(x=horiz_placemnt * 0.702, y=114)
-generate_report_button.bind("<Enter>", lambda button: generate_report_button.configure(image=generate_report_image_lighted))
+generate_report_button.bind("<Enter>",
+                            lambda button: generate_report_button.configure(image=generate_report_image_lighted))
 generate_report_button.bind("<Leave>", lambda button: generate_report_button.configure(image=generate_report_image))
 
 # OPEN LAST REPORT button desc
@@ -93,7 +94,8 @@ setup_test_run_button = Button(f1, width=button_menu_width, height=button_menu_h
                                fg="white", image=setup_test_run_image,
                                command=lambda: test2.setup_test_run(), font=button_font)
 setup_test_run_button.place(x=horiz_placemnt * 0.46, y=114)
-setup_test_run_button.bind("<Enter>", lambda button: setup_test_run_button.configure(image=setup_test_run_image_lighted))
+setup_test_run_button.bind("<Enter>",
+                           lambda button: setup_test_run_button.configure(image=setup_test_run_image_lighted))
 setup_test_run_button.bind("<Leave>", lambda button: setup_test_run_button.configure(image=setup_test_run_image))
 
 # BROWSE YOUR TESTS button desc
@@ -112,5 +114,16 @@ stop_tests_button = Button(f1, width=150, height=25, image=stop_tests_image, bd=
                            command=lambda: test2.kill_process(horiz_placemnt, run_tests_button, stop_tests_button))
 stop_tests_button.bind("<Enter>", lambda button: stop_tests_button.configure(image=stop_tests_image_lighted))
 stop_tests_button.bind("<Leave>", lambda button: stop_tests_button.configure(image=stop_tests_image))
+
+# ----------------------------------------------Second tab section------------------------------------------------------
+# SET COMMISSIONS button desc
+set_commissions_image = PhotoImage(file='D:/testing/soft/set_commissions.gif')
+set_commissions_image_lighted = PhotoImage(file='D:/testing/soft/set_commissions_lighted.gif')
+set_commissions_button = Button(f2, width=150, height=25, image=set_commissions_image, bd=0,
+                                command=lambda: test2.set_commissions())
+set_commissions_button.place(x=horiz_placemnt * 0.23, y=114)
+set_commissions_button.bind("<Enter>",
+                            lambda button: set_commissions_button.configure(image=set_commissions_image_lighted))
+set_commissions_button.bind("<Leave>", lambda button: set_commissions_button.configure(image=set_commissions_image))
 
 root.mainloop()
