@@ -378,61 +378,66 @@ def set_commissions():
             options_sheet = xlrd.open_workbook('D:/testing/ddt_testing/Data for testing/OptionsTestData.xls')
             first_options_sheet = options_sheet.sheet_by_index(0)
             if i < 5:
-                commission_text.insert(END, first_options_sheet.row_values(i + 1)[1])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i + 1)[1]))
             if 4 < i < 10:
-                commission_text.insert(END, first_options_sheet.row_values(i - 4)[2])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 4)[2]))
             if 9 < i < 15:
-                commission_text.insert(END, first_options_sheet.row_values(i - 4)[1])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 4)[1]))
             if 14 < i < 20:
-                commission_text.insert(END, first_options_sheet.row_values(i - 9)[2])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 9)[2]))
             if 19 < i < 25:
-                commission_text.insert(END, first_options_sheet.row_values(i - 9)[1])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 9)[1]))
             if 24 < i < 30:
-                commission_text.insert(END, first_options_sheet.row_values(i - 14)[2])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 14)[2]))
             if 29 < i < 35:
-                commission_text.insert(END, first_options_sheet.row_values(i - 14)[1])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 14)[1]))
             if 34 < i < 40:
-                commission_text.insert(END, first_options_sheet.row_values(i - 19)[2])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 19)[2]))
             if 39 < i < 45:
-                commission_text.insert(END, first_options_sheet.row_values(i - 19)[1])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 19)[1]))
             if 44 < i < 50:
-                commission_text.insert(END, first_options_sheet.row_values(i - 24)[2])
+                commission_text.insert(END, str.rstrip(first_options_sheet.row_values(i - 24)[2]))
             commission_text.place(x=xx, y=yy)
             return commission_text
 
-    class MFCommissionTextbox():  # textbox class
+    class MFCommissionTextbox(Text):  # textbox class
         def put_textbox(self, xx, yy, i):
-            commission_text = Text(mf_frame, width=4, height=1, bg=text_box_color, font='Anago-Book 8',
+            commission_text = Text(mf_frame, width=5, height=1, bg=text_box_color, font='Anago-Book 9',
                                    fg='gray38')
             # select commissions from excel
-            mf_sheet_fee = xlrd.open_workbook(
-                'D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/MF Fee.xlsx')
-            mf_sheet_load = xlrd.open_workbook(
-                'D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/MF Load.xlsx')
-            mf_sheet_nonfee = xlrd.open_workbook(
-                'D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/MF NTFee.xlsx')
-            first_mf_sheet_fee_sheet = mf_sheet_fee.sheet_by_index(0)
-            first_mf_sheet_load = mf_sheet_load.sheet_by_index(0)
-            first_mf_sheet_nonfee = mf_sheet_nonfee.sheet_by_index(0)
+            mf_commissions = xlrd.open_workbook(
+                'D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/Experimental.xls')
+            mf_commissions_sheet = mf_commissions.sheet_by_index(0)
             if i < 5:
-                commissions = first_mf_sheet_fee_sheet.row_values(1)[1]
+                commissions = mf_commissions_sheet.row_values(i + 1)[1]
                 commission_text.insert(END, commissions)
             elif 4 < i < 10:
-                commissions = first_mf_sheet_load.row_values(1)[1]
+                commissions = mf_commissions_sheet.row_values(i - 4)[2]
                 commission_text.insert(END, commissions)
             elif 9 < i < 15:
-                commissions = first_mf_sheet_nonfee.row_values(1)[1]
+                commissions = mf_commissions_sheet.row_values(i - 9)[3]
                 commission_text.insert(END, commissions)
             elif 14 < i < 20:
-                if i == 17:
-                    commission_text.insert(END, '35.0')
-                else:
-                    commission_text.insert(END, '8.0')
+                commissions = mf_commissions_sheet.row_values(i - 14)[4]
+                commission_text.insert(END, commissions)
             elif 19 < i < 25:
-                commission_text.insert(END, '0.0')
+                commissions = mf_commissions_sheet.row_values(i - 19)[5]
+                commission_text.insert(END, commissions)
             elif 24 < i < 30:
-                commission_text.insert(END, '0.0')
+                commissions = mf_commissions_sheet.row_values(i - 24)[6]
+                commission_text.insert(END, commissions)
+            elif 29 < i < 35:
+                commissions = mf_commissions_sheet.row_values(i - 29)[7]
+                commission_text.insert(END, commissions)
+            elif 34 < i < 40:
+                commissions = mf_commissions_sheet.row_values(i - 34)[8]
+                commission_text.insert(END, commissions)
+            elif 39 < i < 45:
+                commissions = mf_commissions_sheet.row_values(i - 39)[9]
+                commission_text.insert(END, commissions)
             commission_text.place(x=xx, y=yy)
+            return commission_text
+
 
 # -------------------------------------------------Stock tab ---------------------------------------------------
 
@@ -532,25 +537,25 @@ def set_commissions():
                 sheet1.write(i + 1, 0, sheet.row_values(i + 1)[0])
                 sheet1.write(i + 1, 3, sheet.row_values(i+1)[3])
             if i < 5:
-                sheet1.write(i + 1, 1, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i + 1, 1, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 4 < i < 10:
-                sheet1.write(i - 4, 2, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 4, 2, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 9 < i < 15:
-                sheet1.write(i - 4, 1, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 4, 1, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 14 < i < 20:
-                sheet1.write(i - 9, 2, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 9, 2, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 19 < i < 25:
-                sheet1.write(i - 9, 1, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 9, 1, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 24 < i < 30:
-                sheet1.write(i - 14, 2, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 14, 2, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 29 < i < 35:
-                sheet1.write(i - 14, 1, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 14, 1, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 34 < i < 40:
-                sheet1.write(i - 19, 2, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 19, 2, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 39 < i < 45:
-                sheet1.write(i - 19, 1, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 19, 1, str.rstrip(options_textbox_objects[i].get('1.0', END)))
             if 44 < i < 50:
-                sheet1.write(i - 24, 2, options_textbox_objects[i].get('1.0', END))
+                sheet1.write(i - 24, 2, str.rstrip(options_textbox_objects[i].get('1.0', END)))
 
         # convert xls to csv
         workbook.save('D:/testing/ddt_testing/Data for testing/OptionsTestData.xls')
@@ -564,6 +569,7 @@ def set_commissions():
 # -------------------------------------------------Mutual Funds tab ------------------------------------------------
 
     mf_textbox_list = []
+    mf_textbox_objects = []
     count = 0
     count2 = 0
     xx = x_placement - 75
@@ -573,10 +579,10 @@ def set_commissions():
         mf_textbox_list.append(textbox_object)
         if s > 29:
             if s == 30:
-                xx = x_placement+12
+                xx = x_placement+9
                 yy = 150
                 count = 1
-            mf_textbox_list[i].put_textbox(xx, yy + ((y_step - 15) * count), i)
+            mf_textbox_objects.append(mf_textbox_list[i].put_textbox(xx, yy + ((y_step - 15) * count), i))
             count += 1
             if s == 34 or s == 39:
                 xx = xx + 1.3 * (x_step-15)
@@ -584,21 +590,21 @@ def set_commissions():
                 count = 1
             continue
         if count < 5:
-            mf_textbox_list[i].put_textbox(xx, yy + ((y_step - 15) * count), i)
+            mf_textbox_objects.append(mf_textbox_list[i].put_textbox(xx, yy + ((y_step - 15) * count), i))
             count += 1
         elif count == 5:
             if count2 == 15:
                 xx = xx + 1.3 * (x_step - 3)
-                mf_textbox_list[i].put_textbox(xx, yy, i)
+                mf_textbox_objects.append(mf_textbox_list[i].put_textbox(xx, yy, i))
                 count2 = 0
                 count = 1
             else:
                 xx = xx + (x_step - 3) / 1.1
-                mf_textbox_list[i].put_textbox(xx, yy, i)
+                mf_textbox_objects.append(mf_textbox_list[i].put_textbox(xx, yy, i))
                 count = 1
         count2 += 1
     ok_mf = Button(mf_frame, text="  Save  ", bg=main_orange, fg='white', font=font, bd=0,
-                   command=lambda: commissions_panel.destroy())
+                   command=lambda: mf_changes_save())
     ok_mf.place(x=146, y=250)
     ok_mf.bind("<Enter>", lambda a: ok_mf.configure(bg="burlywood1"))
     ok_mf.bind("<Leave>", lambda a: ok_mf.configure(bg=main_orange))
@@ -608,5 +614,40 @@ def set_commissions():
     cancel_mf.place(x=200, y=250)
     cancel_mf.bind("<Enter>", lambda a: cancel_mf.configure(bg="gray79"))
     cancel_mf.bind("<Leave>", lambda a: cancel_mf.configure(bg="gray64"))
+
+    def mf_changes_save():
+        rb = xlrd.open_workbook('D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/Experimental.xls')
+        sheet = rb.sheet_by_index(0)
+        workbook = xlwt.Workbook()
+        sheet1 = workbook.add_sheet('Sheet_1')
+        for i in range(0, 45):
+            if i < 5:
+                sheet1.write(i + 1, 1, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 4 < i < 10:
+                sheet1.write(i - 4, 2, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 9 < i < 15:
+                sheet1.write(i - 9, 3, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 14 < i < 20:
+                sheet1.write(i - 14, 4, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 19 < i < 25:
+                sheet1.write(i - 19, 5, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 24 < i < 30:
+                sheet1.write(i - 24, 6, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 29 < i < 35:
+                sheet1.write(i - 29, 7, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 34 < i < 40:
+                sheet1.write(i - 34, 8, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+            elif 39 < i < 45:
+                sheet1.write(i - 39, 9, str.rstrip(mf_textbox_objects[i].get('1.0', END)))
+
+        # convert xls to csv
+        workbook.save('D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/Experimental.xls')
+        wb = xlrd.open_workbook('D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/Experimental.xls')
+        sh = wb.sheet_by_index(0)
+        fh = open('D:/testing/ddt_testing/Data for testing/Mutual Fund Symbols/Experimental.csv', "wb")
+        csv_out = unicodecsv.writer(fh, encoding='utf-8')
+        for row_number in range(sh.nrows):
+            csv_out.writerow(sh.row_values(row_number))
+        commissions_panel.destroy()
 
     commissions_panel.mainloop()
